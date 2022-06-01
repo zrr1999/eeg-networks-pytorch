@@ -40,6 +40,11 @@ with tqdm.trange(500) as t:
             optimizer.step()
             optimizer.zero_grad()
             t.set_postfix(loss=loss)
-
-    torch.save(model.state_dict(), f"./epoch{epoch}_{loss}.pth")
+    val_loss_list = []
+    for epoch in t:
+        for feat, label in val_loader:
+            out = model(feat)
+            val_loss_list.append(loss_fn(out, label))
+    val_mean_loss = sum(val_loss_list)/len(val_loss_list)
+    torch.save(model.state_dict(), f"./epoch{epoch}_{val_mean_loss}.pth")
     torch.save(model.state_dict(), f"./last.pth")
