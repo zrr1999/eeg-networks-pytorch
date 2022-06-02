@@ -44,7 +44,10 @@ class EEGInception(nn.Module):
                     padding="same"
                     # padding=((scales_sample - 1) // 2, 0)
                 ) if torch.__version__ >= "1.9" else nn.Sequential(
-                    CustomPad((scales_sample // 2 - 1, scales_sample // 2, 0, 0))
+                    CustomPad((scales_sample // 2 - 1, scales_sample // 2, 0, 0)),
+                    nn.Conv2d(
+                        1, filters_per_branch, (scales_sample, 1)
+                    )
                 ),
                 nn.BatchNorm2d(filters_per_branch),
                 activation,
@@ -67,7 +70,12 @@ class EEGInception(nn.Module):
                     padding="same"
                     # padding=((scales_sample // 4 - 1) // 2, 0)
                 ) if torch.__version__ >= "1.9" else nn.Sequential(
-                    CustomPad((scales_sample // 8 - 1, scales_sample // 8, 0, 0))
+                    CustomPad((scales_sample // 8 - 1, scales_sample // 8, 0, 0)),
+                    nn.Conv2d(
+                        len(scales_samples) * 2 * filters_per_branch,
+                        filters_per_branch, (scales_sample // 4, 1),
+                        bias=False
+                    )
                 ),
                 nn.BatchNorm2d(filters_per_branch),
                 activation,
@@ -79,19 +87,31 @@ class EEGInception(nn.Module):
 
         # ============================ BLOCK 3: OUTPUT =========================== #
         self.output = nn.Sequential(
-            nn.Conv2d(24, filters_per_branch * len(scales_samples) // 2, (8, 1),
-                      bias=False, padding='same') if torch.__version__ >= "1.9" else nn.Sequential(
-                    CustomPad((4, 3, 0, 0))
-                ),
+            nn.Conv2d(
+                24, filters_per_branch * len(scales_samples) // 2, (8, 1),
+                bias=False, padding='same'
+            ) if torch.__version__ >= "1.9" else nn.Sequential(
+                CustomPad((4, 3, 0, 0)),
+                nn.Conv2d(
+                    24, filters_per_branch * len(scales_samples) // 2, (8, 1),
+                    bias=False
+                )
+            ),
             nn.BatchNorm2d(filters_per_branch * len(scales_samples) // 2),
             activation,
             nn.AvgPool2d((2, 1)),
             nn.Dropout(dropout_rate),
 
-            nn.Conv2d(12, filters_per_branch * len(scales_samples) // 4, (4, 1),
-                      bias=False, padding='same') if torch.__version__ >= "1.9" else nn.Sequential(
-                    CustomPad((2, 1, 0, 0))
-                ),
+            nn.Conv2d(
+                12, filters_per_branch * len(scales_samples) // 4, (4, 1),
+                bias=False, padding='same'
+            ) if torch.__version__ >= "1.9" else nn.Sequential(
+                CustomPad((2, 1, 0, 0)),
+                nn.Conv2d(
+                    12, filters_per_branch * len(scales_samples) // 4, (4, 1),
+                    bias=False
+                )
+            ),
             nn.BatchNorm2d(filters_per_branch * len(scales_samples) // 4),
             activation,
             nn.AvgPool2d((2, 1)),
