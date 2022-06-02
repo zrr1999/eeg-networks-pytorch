@@ -10,8 +10,8 @@ from torch.utils.data import Dataset
 
 
 class ERPDataset(Dataset):
-    def __init__(self, dataset_path='./GIB-UVA ERP-BCI.hdf5', train=True, sep=561615, device="cpu"):
-        with h5py.File(dataset_path, 'r') as hf:
+    def __init__(self, path, train=True, sep=561615, device="cpu"):
+        with h5py.File(path, 'r') as hf:
             self.features = np.array(hf.get("features"), dtype="float32")
             self.erp_labels = np.array(hf.get("erp_labels"), dtype="long")
         if train:
