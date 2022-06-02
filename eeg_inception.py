@@ -44,7 +44,7 @@ class EEGInception(nn.Module):
                     padding="same"
                     # padding=((scales_sample - 1) // 2, 0)
                 ) if torch.__version__ >= "1.9" else nn.Sequential(
-                    CustomPad((scales_sample // 2 - 1, scales_sample // 2, 0, 0)),
+                    CustomPad((0, 0,scales_sample // 2 - 1, scales_sample // 2, )),
                     nn.Conv2d(
                         1, filters_per_branch, (scales_sample, 1)
                     )
@@ -70,7 +70,7 @@ class EEGInception(nn.Module):
                     padding="same"
                     # padding=((scales_sample // 4 - 1) // 2, 0)
                 ) if torch.__version__ >= "1.9" else nn.Sequential(
-                    CustomPad((scales_sample // 8 - 1, scales_sample // 8, 0, 0)),
+                    CustomPad((0, 0, scales_sample // 8 - 1, scales_sample // 8, )),
                     nn.Conv2d(
                         len(scales_samples) * 2 * filters_per_branch,
                         filters_per_branch, (scales_sample // 4, 1),
@@ -91,7 +91,7 @@ class EEGInception(nn.Module):
                 24, filters_per_branch * len(scales_samples) // 2, (8, 1),
                 bias=False, padding='same'
             ) if torch.__version__ >= "1.9" else nn.Sequential(
-                CustomPad((4, 3, 0, 0)),
+                CustomPad((0, 0, 4, 3)),
                 nn.Conv2d(
                     24, filters_per_branch * len(scales_samples) // 2, (8, 1),
                     bias=False
@@ -106,7 +106,7 @@ class EEGInception(nn.Module):
                 12, filters_per_branch * len(scales_samples) // 4, (4, 1),
                 bias=False, padding='same'
             ) if torch.__version__ >= "1.9" else nn.Sequential(
-                CustomPad((2, 1, 0, 0)),
+                CustomPad((0, 0, 2, 1)),
                 nn.Conv2d(
                     12, filters_per_branch * len(scales_samples) // 4, (4, 1),
                     bias=False
@@ -133,7 +133,7 @@ class EEGInception(nn.Module):
 
 
 if __name__ == '__main__':
-    print(nn.functional.pad(torch.zeros(10, 1, 128, 8), (1, 1, 1, 1)).shape)
+    print(nn.functional.pad(torch.zeros(10, 1, 128, 8), (37, 37, 0, 0)).shape)
     # print(EEGInception()(torch.zeros(10, 1, 128, 8)).shape)
     # print(DepthWiseConv2d(3, (3, 3), 2)(torch.zeros(10, 3, 512, 512)).shape)
     # print(nn.AvgPool2d((2, 1))(torch.zeros(10, 3, 512, 512)).shape)

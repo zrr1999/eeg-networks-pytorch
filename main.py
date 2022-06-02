@@ -10,12 +10,13 @@ import os
 import torch
 import tqdm
 from sklearn.preprocessing import OneHotEncoder
-from eeg import EEGInception
+from eeg_inception import EEGInception
 from dataset import ERPDataset
 from torch.utils.data import DataLoader
 from torch import nn, optim
 
-device = "cuda:0"
+torch.__version__ = "1.2"
+device = "cpu"
 
 train_dataset = ERPDataset(device=device)
 val_dataset = ERPDataset(train=False, device=device)
