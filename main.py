@@ -3,14 +3,9 @@
 # @Time : 2022/5/31 0:23
 # @Author : Rongrui Zhan
 # @desc : 本代码未经授权禁止商用
-import h5py
-import numpy as np
-import os
-
 import torch
 import tqdm
-from sklearn.preprocessing import OneHotEncoder
-from eeg_inception import EEGInception
+from nets.eeg_inception import EEGInception
 from dataset import ERPDataset
 from torch.utils.data import DataLoader
 from torch import nn, optim
@@ -40,7 +35,7 @@ with tqdm.trange(500) as t:
             loss.backward()
             optimizer.step()
             optimizer.zero_grad()
-            t.set_postfix(loss=loss)
+            t.set_postfix(loss=loss.item())
     val_loss_list = []
     for epoch in t:
         for feat, label in val_loader:

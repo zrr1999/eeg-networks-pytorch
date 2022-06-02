@@ -31,9 +31,9 @@ class DepthWiseConv2d(nn.Module):
 
 
 class EEGInception(nn.Module):
-    def __init__(self, input_time=1000, fs=128, ncha=8, filters_per_branch=8,
+    def __init__(self, num_classes=2, fs=1282, num_channels=8, filters_per_branch=8,
                  scales_time=(500, 250, 125), dropout_rate=0.25,
-                 activation=nn.ELU(inplace=True), n_classes=2, learning_rate=0.001):
+                 activation=nn.ELU(inplace=True)):
         super().__init__()
         scales_samples = [int(s * fs / 1000) for s in scales_time]
         # ========================== BLOCK 1: INCEPTION ========================== #
@@ -52,7 +52,7 @@ class EEGInception(nn.Module):
                 nn.BatchNorm2d(filters_per_branch),
                 activation,
                 nn.Dropout(dropout_rate),
-                DepthWiseConv2d(8, (1, ncha), 2),
+                DepthWiseConv2d(8, (1, num_channels), 2),
                 nn.BatchNorm2d(filters_per_branch * 2),
                 activation,
                 nn.Dropout(dropout_rate),
@@ -118,17 +118,17 @@ class EEGInception(nn.Module):
             nn.Dropout(dropout_rate),
         )
         self.cls = nn.Sequential(
-            nn.Linear(4 * 1 * 6, n_classes),
+            nn.Linear(4 * 1 * 6, num_classes),
             nn.Softmax(1)
         )
 
     def forward(self, x):
-        x = torch.cat([net(x) for net in self.inception1], 1)
+        x = torch.cat([net(x) for net in self.inception1], dim=1)
         x = self.avg_pool1(x)
-        x = torch.cat([net(x) for net in self.inception2], 1)
+        x = torch.cat([net(x) for net in self.inception2], dim=1)
         x = self.avg_pool2(x)
         x = self.output(x)
-        x = torch.flatten(x, 1)
+        x = torch.flatten(x, start_dim=1)
         return self.cls(x)
 
 
