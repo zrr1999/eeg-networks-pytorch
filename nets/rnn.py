@@ -10,7 +10,7 @@ import torch.nn.functional
 
 class EEGSpatialLSTM(nn.Module):
     def __init__(self, num_classes, input_size, hidden_size, num_layers=2,
-                 num_spatial=8, num_times=None, num_channels=8, dropout_rate=0.5, dependent=True):
+                 num_spatial=8, num_times=None, num_channels=8, dropout_rate=0.5, dependent=False):
         super().__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size

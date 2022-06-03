@@ -22,14 +22,14 @@ def main(
         model: Model = "inception",
         device: str = "cpu",
         dataset_path: str = './GIB-UVA ERP-BCI.hdf5',
-        model_path: str = ""
+        model_path: str = "./weights"
 ):
     train_dataset = ERPDataset(dataset_path, device=device)
     val_dataset = ERPDataset(dataset_path, train=False, device=device)
     train_loader = DataLoader(train_dataset, 1024)
     val_loader = DataLoader(val_dataset, 1024)
     if model == "inception":
-        model = EEGInception().to(device)
+        model = EEGInception(2).to(device)
     else:
         model = EEGSpatialLSTM(2, 16, 16).to(device)
     loss_fn = nn.CrossEntropyLoss()

@@ -31,7 +31,7 @@ class DepthWiseConv2d(nn.Module):
 
 
 class EEGInception(nn.Module):
-    def __init__(self, num_classes=2, fs=1282, num_channels=8, filters_per_branch=8,
+    def __init__(self, num_classes, fs=1282, num_channels=8, filters_per_branch=8,
                  scales_time=(500, 250, 125), dropout_rate=0.25,
                  activation=nn.ELU(inplace=True)):
         super().__init__()
