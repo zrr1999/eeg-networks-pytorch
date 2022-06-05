@@ -6,9 +6,10 @@
 import h5py
 import numpy as np
 import torch
+from typing import Tuple
 from torch.utils.data import Dataset
 
-
+torch.__version__
 class ERPDataset(Dataset):
     def __init__(self, path, train=True, sep=561615, device="cpu"):
         with h5py.File(path, 'r') as hf:
@@ -26,7 +27,7 @@ class ERPDataset(Dataset):
              self.features.shape[2])
         )).to(device)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> Tuple[torch.Tensor, torch.Tensor]:
         return self.features[index], self.erp_labels[index]
 
     def __len__(self):
