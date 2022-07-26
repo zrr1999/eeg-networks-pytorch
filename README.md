@@ -9,24 +9,36 @@ Implementation of various simple networks based on PyTorch to classify EEG signa
 - [ ] eeg-gcn
 
 ## 使用方法（Usage）
-### 准备工作
+### 安装（Install）
+使用 PYPI 安装。
+Install via pypi.
+```sh
+pip install EEGNetworks
+```
 
-下载数据集 [GIB-UVa ERP-BCI dataset](https://www.kaggle.com/datasets/esantamaria/gibuva-erpbci-dataset?resource=download)
-
-
-
-安装依赖包
-
+如果不想安装包，也可以克隆本项目并安装依赖包。
+Clone repo and install requirements.txt.
 ```sh
 pip install -r requirements.txt
 ```
-
-### 训练
-
+### 训练（Training）
+可以通过以下命令训练模型
 ```sh
-python train.py --model inception
+python train.py --model_name inception --device cpu --dataset_path ./GIB-UVA ERP-BCI.hdf5 --model_path ./weights
+```
+通过以下命令获取更多详细信息
+```sh
+python train.py --help
+```
+### 验证（Validation）
+可以通过以下命令验证模型
+```sh
+python val.py --model_path ./weights/last.pth --model_name inception
+```
+通过以下命令获取更多详细信息
+```sh
+python val.py --help
 ```
 
-```sh
-python train.py --model lstm
-```
+## 参考资料（Reference）
+[GIB-UVa ERP-BCI dataset](https://www.kaggle.com/datasets/esantamaria/gibuva-erpbci-dataset?resource=download)

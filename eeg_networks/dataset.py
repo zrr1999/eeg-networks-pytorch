@@ -9,7 +9,7 @@ import torch
 from typing import Tuple
 from torch.utils.data import Dataset
 
-torch.__version__
+
 class ERPDataset(Dataset):
     def __init__(self, path, train=True, sep=561615, device="cpu"):
         with h5py.File(path, 'r') as hf:

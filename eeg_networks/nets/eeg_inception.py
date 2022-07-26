@@ -130,10 +130,3 @@ class EEGInception(nn.Module):
         x = self.output(x)
         x = torch.flatten(x, start_dim=1)
         return self.cls(x)
-
-
-if __name__ == '__main__':
-    print(nn.functional.pad(torch.zeros(10, 1, 128, 8), (37, 37, 0, 0)).shape)
-    # print(EEGInception()(torch.zeros(10, 1, 128, 8)).shape)
-    # print(DepthWiseConv2d(3, (3, 3), 2)(torch.zeros(10, 3, 512, 512)).shape)
-    # print(nn.AvgPool2d((2, 1))(torch.zeros(10, 3, 512, 512)).shape)

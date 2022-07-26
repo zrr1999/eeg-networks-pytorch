@@ -6,6 +6,6 @@
 from enum import Enum
 
 
-class Model(str, Enum):
+class ModelName(str, Enum):
     inception = "inception"
     lstm = "lstm"
