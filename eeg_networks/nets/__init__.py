@@ -4,4 +4,4 @@
 # @Author : Rongrui Zhan
 # @desc : 本代码未经授权禁止商用
 from .eeg_inception import EEGInception
-from .lstm import EEGSpatialLSTM
+from .eeg_lstm import EEGSpatialLSTM

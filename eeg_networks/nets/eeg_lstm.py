@@ -56,9 +56,10 @@ class EEGSpatialLSTM(nn.Module):
             x = torch.cat([
                 self.lstm(x[:, i])[0][:, -1].unsqueeze(1) for i in range(self.num_channels)
             ], dim=1)
-        # shape of x: NxCxH
         x = x.unsqueeze(1)
+        # shape of x: Nx1xCxH
         x = self.block(x)
+        # shape of x: NxSx1xH/4
         x = torch.flatten(x, start_dim=1)
         return self.cls(x)
 
