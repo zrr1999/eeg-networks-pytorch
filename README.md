@@ -14,17 +14,18 @@ Install via PYPI.
 pip install EEGNetworks
 ```
 
-如果不想安装包，也可以克隆本项目并安装依赖包。
-Clone repo and install requirements.txt.
+If you do not want to install packages, you can also clone this project and install dependent packages.
 ```sh
+git clone https://github.com/zrr1999/eeg-networks-pytorch
+cd eeg-networks-pytorch
 pip install -r requirements.txt
 ```
 ### Training
-可以通过以下命令训练模型
+You can train the model with the following command.
 ```sh
 python train.py --model_name inception --device cpu --dataset_path ./GIB-UVA ERP-BCI.hdf5 --model_path ./weights
 ```
-通过以下命令获取更多详细信息
+Get more details with the following command.
 ```sh
 python train.py --help
 ```

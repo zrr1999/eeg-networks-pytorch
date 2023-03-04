@@ -16,6 +16,8 @@ pip install EEGNetworks
 
 如果不想安装包，也可以克隆本项目并安装依赖包。
 ```sh
+git clone https://github.com/zrr1999/eeg-networks-pytorch
+cd eeg-networks-pytorch
 pip install -r requirements.txt
 ```
 ### 训练
