@@ -1,0 +1,20 @@
+[tool.pdm]
+
+[project]
+name = "EEGNetworks"
+version = "0.1.1"
+description = "基于PyTorch的各种用于EEG分类任务的简单网络的实现。"
+authors = [
+    {name = "六个骨头", email = "2742392377@qq.com"},
+]
+dependencies = ["torch", "tqdm", "h5py", "numpy", "typer"]
+requires-python = ">=3.8"
+license = {text = "MIT"}
+readme = "README.md"
+
+homepage = "https://github.com/zrr1999/eeg-networks-pytorch"
+repository = "https://github.com/zrr1999/eeg-networks-pytorch"
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
