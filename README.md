@@ -1,4 +1,4 @@
-English | [简体中文](README_ch.md)
+English | [简体中文](README-cn.md)
 # EEG-PyTorch
 Implementation of various simple networks based on PyTorch to classify EEG signals.
 
