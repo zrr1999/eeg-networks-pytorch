@@ -1,0 +1,13 @@
+{
+  "entry": "locales/zh_CN.json",
+  "entryLocale": "zh_CN",
+  "output": "locales",
+  "outputLocales": ["en_US"],
+  "markdown": {
+    "entry": ["./README.zh-CN.md"],
+    "entryLocale": "zh_CN",
+    "entryExtension": ".zh-CN.md",
+    "outputLocales": ["en_US"]
+  }
+}
+

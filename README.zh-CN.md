@@ -1,4 +1,4 @@
-[English](README.md) | 简体中文
+[English](README.en_US.md) | 简体中文
 # EEG-PyTorch
 基于PyTorch的各种用于EEG分类任务的简单网络的实现。
 
@@ -11,7 +11,7 @@
 ### 安装
 使用 PYPI 安装。
 ```sh
-pip install EEGNetworks
+pip install eeg-networks
 ```
 
 如果不想安装包，也可以克隆本项目并安装依赖包。

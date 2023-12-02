@@ -1,0 +1,14 @@
+{
+  "English | [简体中文](README.zh-CN.md)": "[English](README.en_US.md) | 简体中文",
+  "Implementation of various simple networks based on PyTorch to classify EEG signals.": "基于 PyTorch 实现的用于分类 EEG 信号的各种简单网络。",
+  "Usage": "使用方法",
+  "Install": "安装",
+  "Install via PYPI.": "通过 PYPI 安装。",
+  "If you do not want to install packages, you can also clone this project and install dependent packages.": "如果你不想安装包，也可以克隆此项目并安装依赖包。",
+  "Training": "训练",
+  "You can train the model with the following command.": "您可以使用以下命令训练模型。",
+  "Get more details with the following command.": "使用以下命令获取更多详细信息。",
+  "Validation": "验证",
+  "You can validate the model with the following command.": "您可以使用以下命令验证模型。",
+  "Reference": "参考"
+}

@@ -1,5 +1,5 @@
 [project]
-name = "EEGNetworks"
+name = "eeg-networks"
 dynamic = ["version"]
 description = "基于PyTorch的各种用于EEG分类任务的简单网络的实现。"
 authors = [
