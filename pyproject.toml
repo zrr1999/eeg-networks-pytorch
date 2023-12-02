@@ -1,8 +1,6 @@
-[tool.pdm]
-
 [project]
 name = "EEGNetworks"
-version = "0.1.1"
+dynamic = ["version"]
 description = "基于PyTorch的各种用于EEG分类任务的简单网络的实现。"
 authors = [
     {name = "六个骨头", email = "2742392377@qq.com"},
@@ -12,9 +10,44 @@ requires-python = ">=3.8"
 license = {text = "MIT"}
 readme = "README.md"
 
-homepage = "https://github.com/zrr1999/eeg-networks-pytorch"
-repository = "https://github.com/zrr1999/eeg-networks-pytorch"
+[project.urls]
+Homepage = "https://pypi.org/project/auto-config"
+Repository = "https://github.com/zrr1999/auto-config.git"
+
+[tool.pdm.version]
+source = "scm"
+write_to = "eeg_networks/__version__.py"
+write_template = "__version__ = '{}'"
+
+[tool.pdm.build]
+includes = ["eeg_networks"]
+
+[tool.ruff]
+line-length = 120
+src = ["eeg_networks"]
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+  "I",    # isort
+  "B",    # flake8-bugbear
+  "C4",   # flake8-comprehensions
+  "PGH",  # pygrep-hooks
+  "RUF",  # ruff
+  "W",    # pycodestyle
+  "YTT",  # flake8-2020
+]
+ignore = [
+    "F841"
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["eeg_networks"]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "I002"]
 
 [build-system]
-requires = ["pdm-pep517>=1.0.0"]
-build-backend = "pdm.pep517.api"
+requires = ["pdm-backend", "pdm-pyfuture"]
+build-backend = "pdm.backend"
