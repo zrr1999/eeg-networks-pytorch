@@ -11,16 +11,18 @@ license = {text = "MIT"}
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://pypi.org/project/auto-config"
-Repository = "https://github.com/zrr1999/auto-config.git"
+Homepage = "https://github.com/zrr1999/eeg-networks-pytorch"
+Repository = "https://github.com/zrr1999/eeg-networks-pytorch.git"
 
-[tool.pdm.version]
-source = "scm"
-write_to = "eeg_networks/__version__.py"
-write_template = "__version__ = '{}'"
+[tool.hatch.version]
+source = "vcs"
 
-[tool.pdm.build]
-includes = ["eeg_networks"]
+[tool.hatch.build.hooks.vcs]
+version-file = "eeg_networks/__version__.py"
+template = "__version__ = '{version}'"
+
+[tool.hatch.build.targets.wheel]
+packages = ["eeg_networks"]
 
 [tool.ruff]
 line-length = 100
@@ -59,5 +61,5 @@ required-imports = ["from __future__ import annotations"]
 "__init__.py" = ["F401", "I002"]
 
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
