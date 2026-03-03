@@ -11,8 +11,8 @@ license = {text = "MIT"}
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://pypi.org/project/auto-config"
-Repository = "https://github.com/zrr1999/auto-config.git"
+Homepage = "https://github.com/zrr1999/eeg-networks-pytorch"
+Repository = "https://github.com/zrr1999/eeg-networks-pytorch.git"
 
 [tool.pdm.version]
 source = "scm"
